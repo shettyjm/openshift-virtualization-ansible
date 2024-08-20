@@ -71,15 +71,6 @@ spec:
           name: {{ name }}
         name: 'rootdisk'
       - cloudInitNoCloud:
-            #cloud-config
-            user: cloud-user
-            password: admin
-            chpasswd:
-              expire: false
-            bootcmd:
-              - sudo yum install -y httpd
-              - sudo systemctl enable httpd
-              - sudo systemstl start httpd
-              - sudo echo "hello world" >> /var/www/html/index.html
-              - sudo systemctl restart httpd
+          secretRef:
+            name: {{ cloud_init_secret }}
         name: cloudinitdisk
